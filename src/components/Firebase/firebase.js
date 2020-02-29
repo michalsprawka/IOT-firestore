@@ -60,21 +60,21 @@ class Firebase {
 
   users = () => this.db.collection("users");
 
-  sensors = uid => this.db.collection(`users/${uid}/sensors`);
+  // sensors = uid => this.db.collection(`users/${uid}/sensors`);
 
-  sensor = (uid, sensorID) => this.db.doc(`users/${uid}/sensors/${sensorID}`);
+  // sensor = (uid, sensorID) => this.db.doc(`users/${uid}/sensors/${sensorID}`);
 
-  actuators = uid => this.db.collection(`users/${uid}/actuators`);
+  // actuators = uid => this.db.collection(`users/${uid}/actuators`);
 
-  actuator = (uid, sensorID) => this.db.doc(`users/${uid}/actuators/${sensorID}`);
+  // actuator = (uid, sensorID) => this.db.doc(`users/${uid}/actuators/${sensorID}`);
 
-  sensorTypes = () => this.db.collection("sensorTypes");
+  // sensorTypes = () => this.db.collection("sensorTypes");
 
-  sensorType = uid => this.db.doc(`sensorTypes/${uid}`);
+  // sensorType = uid => this.db.doc(`sensorTypes/${uid}`);
 
-  actuatorTypes = () => this.db.collection("actuatorTypes");
+  // actuatorTypes = () => this.db.collection("actuatorTypes");
 
-  actuatorType = uid => this.db.doc(`actuatorTypes/${uid}`);
+  // actuatorType = uid => this.db.doc(`actuatorTypes/${uid}`);
 }
 
 export default Firebase;
