@@ -23,7 +23,7 @@ const AdminPage = () => (
     <p>The Admin Page is accessible by every signed in admin user.</p>
 
     <Switch>
-    {/* <Route  exact path={ROUTES.ADMIN_SENSORTYPES_DETAILS}  component={SensorTypeItem} /> */}
+   
       <Route exact path={ROUTES.ADMIN_USERS_DETAILS} component={UserItem} />
       
       <Route exact path={ROUTES.ADMIN} component={UserList} />
@@ -39,15 +39,7 @@ class UserListBase extends Component {
     this.state = {
       loading: false,
       users: [],
-     //sensorTypes: [],
-      //actuatorTypes: [],
-      //sensorName: "",
-      //sensorDescription: "",
-      //detailedSensorDescription: "",
-      //code: "",
-      //actuatorName: "",
-      //actuatorDescription: "",
-      //modalindex: 0
+    
     };
   }
 
@@ -67,87 +59,26 @@ class UserListBase extends Component {
       });
     });
 
-  //  this.unsubscribeSensorTypes = this.props.firebase.sensorTypes()
-  //  .onSnapshot( snapshot => {
-  //     let sensorTypesList = [];
-  //     snapshot.forEach(
-  //       doc => sensorTypesList.push({
-  //         ...doc.data(), uid: doc.id
-  //       })
-  //     )
-  //       this.setState({
-  //         sensorTypes: sensorTypesList,
-  //         loading: false
-  //       }); 
-  //   });
-
-  //   this.unsubscribeActuatorTypes = this.props.firebase.actuatorTypes()
-  //   .onSnapshot( snapshot => {
-  //      let actuatorTypesList = [];
-  //      snapshot.forEach(
-  //        doc => actuatorTypesList.push({
-  //          ...doc.data(), uid: doc.id
-  //        })
-  //      )
-  //        this.setState({
-  //          actuatorTypes: actuatorTypesList,
-  //          loading: false
-  //        }); 
-  //    });
+  
 
   }
 
   componentWillUnmount() {
    this.unsubscribeUsers();
-  //  this.unsubscribeSensorTypes();
-  //  this.unsubscribeActuatorTypes();
+  
   }
-  // onChangeText1 = event => {
-  //   this.setState({ sensorName: event.target.value });
-  // };
-
-  // onChangeText2 = event => {
-  //   this.setState({ sensorDescription: event.target.value });
-  // };
+ 
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  // onCreateSensorType = event => {
-  //   event.preventDefault();
-  //   this.props.firebase.sensorTypes().add({
-  //     name: this.state.sensorName,
-  //     description: this.state.sensorDescription
-  //   });
-  // };
-
-  // onCreateActuatorType = event => {
-  //   event.preventDefault();
-  //   console.log(
-  //     "in state",
-  //     this.state.actuatorName,
-  //     this.state.actuatorDescription
-  //   );
-  //   this.props.firebase.actuatorTypes().add({
-  //     name: this.state.actuatorName,
-  //     description: this.state.actuatorDescription,
-  //     modalindex: this.state.modalindex
-  //   });
-  // };
+ 
 
   render() {
     const {
       users,
       loading,
-      // sensorName,
-      // sensorDescription,
-      // detailedSensorDescription,
-      // code,
-      // sensorTypes,
-      // actuatorName,
-      // actuatorDescription,
-      // actuatorTypes,
-      // modalindex
+    
     } = this.state;
 
     return (
@@ -192,150 +123,7 @@ class UserListBase extends Component {
           New User
         </Divider>
         <SignUpLink />
-        {/* <Header as="h1" style={{color: "blue"}}>Sensor Types</Header> */}
-        {/* <Divider horizontal section>
-          SensorTypes
-        </Divider>
-        <Table fixed singleLine>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>ID</Table.HeaderCell>
-              <Table.HeaderCell>Type Name</Table.HeaderCell>
-              <Table.HeaderCell>Type Description</Table.HeaderCell>
-              <Table.HeaderCell>Actions</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {sensorTypes && sensorTypes.map((type, i) => (
-              <Table.Row key={i}>
-                <Table.Cell>{type.uid}</Table.Cell>
-                <Table.Cell>{type.name}</Table.Cell>
-                <Table.Cell>{type.description}</Table.Cell>
-                <Table.Cell>
-                  <Button primary as={Link} to={{
-                     pathname: `${ROUTES.ADMIN_SENSORTYPES}/${type.uid}`,
-                     state: { type }
-                  }}>
-                    Details
-                  </Button>
-                </Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>
-
-        <Divider horizontal section>
-          New Sensor Type
-        </Divider>
-        <Form onSubmit={event => this.onCreateSensorType(event)}>
-          <Form.Field>
-            <label>Nazwa sensora</label>
-            <input
-              name="sensorName"
-              type="text"
-              value={sensorName}
-              onChange={this.onChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Opis sensora</label>
-            <input
-              name="sensorDescription"
-              type="text"
-              value={sensorDescription}
-              onChange={this.onChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Szczegółowy Opis sensora</label>
-            <textarea
-              name="detailedSensorDescription"
-              type="textarea"
-              value={detailedSensorDescription}
-              onChange={this.onChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Program</label>
-            <textarea
-              name="code"
-              type="textarea"
-              value={code}
-              onChange={this.onChange}
-            />
-          </Form.Field>
-          <Button primary type="submit">
-            Submit
-          </Button>
-        </Form>
-        
-        <Header as="h1" style={{color: "blue"}}>Actuator Types</Header>
-        <Divider horizontal section>
-          ActuatorTypes
-        </Divider>
-        <Table fixed singleLine>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>ID</Table.HeaderCell>
-              <Table.HeaderCell>Type Name</Table.HeaderCell>
-              <Table.HeaderCell>Type Description</Table.HeaderCell>
-              <Table.HeaderCell>Modal Index</Table.HeaderCell>
-              <Table.HeaderCell>Actions</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {actuatorTypes && actuatorTypes.map((type, i) => (
-              <Table.Row key={i}>
-                <Table.Cell>{type.uid}</Table.Cell>
-                <Table.Cell>{type.name}</Table.Cell>
-                <Table.Cell>{type.description}</Table.Cell>
-                <Table.Cell>{type.modalindex}</Table.Cell>
-
-                <Table.Cell>
-                  <Button primary as={Link} to={{}}>
-                    Details
-                  </Button>
-                </Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>
-
-        <Divider horizontal section>
-          New Actuator Type
-        </Divider>
-        <Form onSubmit={this.onCreateActuatorType}>
-          <Form.Field>
-            <label>Nazwa aktuatora</label>
-            <input
-              name="actuatorName"
-              type="text"
-              value={actuatorName}
-              onChange={this.onChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Modal Index</label>
-            <input
-              name="modalindex"
-              type="number"
-              value={modalindex}
-              onChange={this.onChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Opis aktuatora</label>
-            <textarea
-              name="actuatorDescription"
-              type="textarea"
-              value={actuatorDescription}
-              onChange={this.onChange}
-            />
-          </Form.Field>
-          <Button primary type="submit">
-            Submit
-          </Button>
-        </Form> */}
+   
       </div>
     );
   }
