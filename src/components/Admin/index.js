@@ -23,7 +23,7 @@ const AdminPage = () => (
     <p>The Admin Page is accessible by every signed in admin user.</p>
 
     <Switch>
-    <Route  exact path={ROUTES.ADMIN_SENSORTYPES_DETAILS}  component={SensorTypeItem} />
+    {/* <Route  exact path={ROUTES.ADMIN_SENSORTYPES_DETAILS}  component={SensorTypeItem} /> */}
       <Route exact path={ROUTES.ADMIN_USERS_DETAILS} component={UserItem} />
       
       <Route exact path={ROUTES.ADMIN} component={UserList} />
@@ -39,15 +39,15 @@ class UserListBase extends Component {
     this.state = {
       loading: false,
       users: [],
-      sensorTypes: [],
-      actuatorTypes: [],
-      sensorName: "",
-      sensorDescription: "",
-      detailedSensorDescription: "",
-      code: "",
-      actuatorName: "",
-      actuatorDescription: "",
-      modalindex: 0
+     //sensorTypes: [],
+      //actuatorTypes: [],
+      //sensorName: "",
+      //sensorDescription: "",
+      //detailedSensorDescription: "",
+      //code: "",
+      //actuatorName: "",
+      //actuatorDescription: "",
+      //modalindex: 0
     };
   }
 
@@ -67,40 +67,40 @@ class UserListBase extends Component {
       });
     });
 
-   this.unsubscribeSensorTypes = this.props.firebase.sensorTypes()
-   .onSnapshot( snapshot => {
-      let sensorTypesList = [];
-      snapshot.forEach(
-        doc => sensorTypesList.push({
-          ...doc.data(), uid: doc.id
-        })
-      )
-        this.setState({
-          sensorTypes: sensorTypesList,
-          loading: false
-        }); 
-    });
+  //  this.unsubscribeSensorTypes = this.props.firebase.sensorTypes()
+  //  .onSnapshot( snapshot => {
+  //     let sensorTypesList = [];
+  //     snapshot.forEach(
+  //       doc => sensorTypesList.push({
+  //         ...doc.data(), uid: doc.id
+  //       })
+  //     )
+  //       this.setState({
+  //         sensorTypes: sensorTypesList,
+  //         loading: false
+  //       }); 
+  //   });
 
-    this.unsubscribeActuatorTypes = this.props.firebase.actuatorTypes()
-    .onSnapshot( snapshot => {
-       let actuatorTypesList = [];
-       snapshot.forEach(
-         doc => actuatorTypesList.push({
-           ...doc.data(), uid: doc.id
-         })
-       )
-         this.setState({
-           actuatorTypes: actuatorTypesList,
-           loading: false
-         }); 
-     });
+  //   this.unsubscribeActuatorTypes = this.props.firebase.actuatorTypes()
+  //   .onSnapshot( snapshot => {
+  //      let actuatorTypesList = [];
+  //      snapshot.forEach(
+  //        doc => actuatorTypesList.push({
+  //          ...doc.data(), uid: doc.id
+  //        })
+  //      )
+  //        this.setState({
+  //          actuatorTypes: actuatorTypesList,
+  //          loading: false
+  //        }); 
+  //    });
 
   }
 
   componentWillUnmount() {
    this.unsubscribeUsers();
-   this.unsubscribeSensorTypes();
-   this.unsubscribeActuatorTypes();
+  //  this.unsubscribeSensorTypes();
+  //  this.unsubscribeActuatorTypes();
   }
   // onChangeText1 = event => {
   //   this.setState({ sensorName: event.target.value });
@@ -113,41 +113,41 @@ class UserListBase extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  onCreateSensorType = event => {
-    event.preventDefault();
-    this.props.firebase.sensorTypes().add({
-      name: this.state.sensorName,
-      description: this.state.sensorDescription
-    });
-  };
+  // onCreateSensorType = event => {
+  //   event.preventDefault();
+  //   this.props.firebase.sensorTypes().add({
+  //     name: this.state.sensorName,
+  //     description: this.state.sensorDescription
+  //   });
+  // };
 
-  onCreateActuatorType = event => {
-    event.preventDefault();
-    console.log(
-      "in state",
-      this.state.actuatorName,
-      this.state.actuatorDescription
-    );
-    this.props.firebase.actuatorTypes().add({
-      name: this.state.actuatorName,
-      description: this.state.actuatorDescription,
-      modalindex: this.state.modalindex
-    });
-  };
+  // onCreateActuatorType = event => {
+  //   event.preventDefault();
+  //   console.log(
+  //     "in state",
+  //     this.state.actuatorName,
+  //     this.state.actuatorDescription
+  //   );
+  //   this.props.firebase.actuatorTypes().add({
+  //     name: this.state.actuatorName,
+  //     description: this.state.actuatorDescription,
+  //     modalindex: this.state.modalindex
+  //   });
+  // };
 
   render() {
     const {
       users,
       loading,
-      sensorName,
-      sensorDescription,
-      detailedSensorDescription,
-      code,
-      sensorTypes,
-      actuatorName,
-      actuatorDescription,
-      actuatorTypes,
-      modalindex
+      // sensorName,
+      // sensorDescription,
+      // detailedSensorDescription,
+      // code,
+      // sensorTypes,
+      // actuatorName,
+      // actuatorDescription,
+      // actuatorTypes,
+      // modalindex
     } = this.state;
 
     return (
@@ -192,8 +192,8 @@ class UserListBase extends Component {
           New User
         </Divider>
         <SignUpLink />
-        <Header as="h1" style={{color: "blue"}}>Sensor Types</Header>
-        <Divider horizontal section>
+        {/* <Header as="h1" style={{color: "blue"}}>Sensor Types</Header> */}
+        {/* <Divider horizontal section>
           SensorTypes
         </Divider>
         <Table fixed singleLine>
@@ -335,7 +335,7 @@ class UserListBase extends Component {
           <Button primary type="submit">
             Submit
           </Button>
-        </Form>
+        </Form> */}
       </div>
     );
   }
@@ -417,88 +417,88 @@ class UserItemBase extends Component {
     );
   }
 }
-class SensorTypeItemBase extends Component {
-  constructor(props) {
-    super(props);
+// class SensorTypeItemBase extends Component {
+//   constructor(props) {
+//     super(props);
 
-    this.state = {
-      loading: false,
-      type: null,
-      ...props.location.state
-    };
-  }
+//     this.state = {
+//       loading: false,
+//       type: null,
+//       ...props.location.state
+//     };
+//   }
 
-  componentDidMount() {
-    // if (this.state.user) {
-    //   console.log("State user: ", this.state.user);
-    //   return;
-    console.log("jestem",this.state)
-    }
+//   componentDidMount() {
+//     // if (this.state.user) {
+//     //   console.log("State user: ", this.state.user);
+//     //   return;
+//     console.log("jestem",this.state)
+//     }
 
-  //   this.setState({ loading: true });
+//   //   this.setState({ loading: true });
 
-  //   this.props.firebase
-  //     .user(this.props.match.params.id)
-  //     .on("value", snapshot => {
-  //       this.setState({
-  //         user: snapshot.val(),
-  //         loading: false
-  //       });
-  //     });
-  // }
+//   //   this.props.firebase
+//   //     .user(this.props.match.params.id)
+//   //     .on("value", snapshot => {
+//   //       this.setState({
+//   //         user: snapshot.val(),
+//   //         loading: false
+//   //       });
+//   //     });
+//   // }
 
-  // componentWillUnmount() {
-  //   this.props.firebase.user(this.props.match.params.id).off();
-  // //  this.props.firebase.user().off();
-  // }
+//   // componentWillUnmount() {
+//   //   this.props.firebase.user(this.props.match.params.id).off();
+//   // //  this.props.firebase.user().off();
+//   // }
 
-  // onSendPasswordResetEmail = () => {
-  //   this.props.firebase.doPasswordReset(this.state.user.email);
-  // };
+//   // onSendPasswordResetEmail = () => {
+//   //   this.props.firebase.doPasswordReset(this.state.user.email);
+//   // };
 
-  render() {
-    const {  loading } = this.state;
+//   render() {
+//     const {  loading } = this.state;
    
 
-    return (
-      <>
-         <h2>Sensor types</h2>
-        <Card fluid={true}>
-          {loading ? (
-            <Loader active inline="centered" />
-          ) : (
-            <Card.Content>
-              <Card.Header>Sensor Type: {this.state.type.uid} </Card.Header>
-              <Card.Description>
-                {/* {user && (
-                  <div>
-                    <Card.Content>
-                      <Card.Meta>
-                        <span>Username: {user.username}</span>
-                      </Card.Meta>
-                      <Card.Description>{user.email}</Card.Description>
-                      <br />
-                      <Button
-                        primary
-                        type="button"
-                        onClick={this.onSendPasswordResetEmail}
-                      >
-                        Send Password Reset
-                      </Button>
-                    </Card.Content>
-                  </div>
-                )} */}
-              </Card.Description>
-            </Card.Content>
-          )}
-        </Card>
-      </>
-    );
-  }
-}
+//     return (
+//       <>
+//          <h2>Sensor types</h2>
+//         <Card fluid={true}>
+//           {loading ? (
+//             <Loader active inline="centered" />
+//           ) : (
+//             <Card.Content>
+//               <Card.Header>Sensor Type: {this.state.type.uid} </Card.Header>
+//               <Card.Description>
+//                 {/* {user && (
+//                   <div>
+//                     <Card.Content>
+//                       <Card.Meta>
+//                         <span>Username: {user.username}</span>
+//                       </Card.Meta>
+//                       <Card.Description>{user.email}</Card.Description>
+//                       <br />
+//                       <Button
+//                         primary
+//                         type="button"
+//                         onClick={this.onSendPasswordResetEmail}
+//                       >
+//                         Send Password Reset
+//                       </Button>
+//                     </Card.Content>
+//                   </div>
+//                 )} */}
+//               </Card.Description>
+//             </Card.Content>
+//           )}
+//         </Card>
+//       </>
+//     );
+//   }
+// }
 const UserList = withFirebase(UserListBase);
 const UserItem = withFirebase(UserItemBase);
-const SensorTypeItem = withFirebase(SensorTypeItemBase);
+//const SensorTypeItem = withFirebase(SensorTypeItemBase);
 
 const condition = authUser =>
   // authUser && authUser.roles.includes(ROLES.ADMIN);
